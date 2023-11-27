@@ -1,6 +1,6 @@
 # EdmGen2
 
-[![Build](https://github.com/marco-bertschi/EdmGen2/actions/workflows/build.yml/badge.svg?branch=master&event=status)](https://github.com/marco-bertschi/EdmGen2/actions/workflows/build.yml)
+[![Build](https://github.com/marco-bertschi/EdmGen2/actions/workflows/build.yml/badge.svg)](https://github.com/marco-bertschi/EdmGen2/actions/workflows/build.yml)
 
 ## Notes
 
