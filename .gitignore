@@ -2,3 +2,5 @@
 *.user
 bin
 obj
+/src/.vs/EdmGen2
+/.vs/EdmGen2/v17
