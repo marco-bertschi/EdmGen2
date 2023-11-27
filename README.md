@@ -1,5 +1,7 @@
 # EdmGen2
 
+[![Build](https://github.com/marco-bertschi/EdmGen2/actions/workflows/build.yml/badge.svg?branch=master&event=status)](https://github.com/marco-bertschi/EdmGen2/actions/workflows/build.yml)
+
 ## Notes
 
 The code in this repository has been modified from the original repo located at [cincuranet/EdmGen2](https://github.com/cincuranet/EdmGen2).
