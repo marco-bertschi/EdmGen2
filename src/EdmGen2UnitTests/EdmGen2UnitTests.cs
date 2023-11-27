@@ -84,7 +84,6 @@ namespace EdmGen2UnitTests
         }
 
         //Console.WriteLine("                 /ModelGen <connection string> <provider name> <model name>");
-        //Console.WriteLine("                 /RetrofitModel <connection string> <provider name> <model name> <percent threshold>?");
         //Console.WriteLine("                 /ViewGen cs|vb <edmx file>");
         //Console.WriteLine("                 /Validate <edmx file>");
 

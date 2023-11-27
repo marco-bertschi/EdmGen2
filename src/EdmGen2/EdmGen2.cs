@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.Entity.Design;
 using System.Data.Mapping;
 using System.Data.Metadata.Edm;
@@ -16,7 +15,6 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using ConceptualEdmGen;
 
 namespace EdmGen2
 {
@@ -32,7 +30,7 @@ namespace EdmGen2
     public class EdmGen2
     {
 
-        internal enum Mode { FromEdmx, ToEdmx, ModelGen, CodeGen, ViewGen, Validate, RetrofitModel, Help }
+        internal enum Mode { FromEdmx, ToEdmx, ModelGen, CodeGen, ViewGen, Validate, Help }
 
         // a class that understands what the different XML namespaces are for the different EF versions. 
         private static NamespaceManager _namespaceManager = new NamespaceManager();
@@ -67,9 +65,6 @@ namespace EdmGen2
                 case Mode.Validate:
                     Validate(args);
                     break;
-                case Mode.RetrofitModel:
-                    RetrofitModel(args);
-                    break;
                 default:
                     ShowUsage();
                     return;
@@ -82,11 +77,9 @@ namespace EdmGen2
             Console.WriteLine("                 /FromEdmx <edmx file>");
             Console.WriteLine("                 /ToEdmx <csdl file> <msl file> <ssdl file>");
 			Console.WriteLine("                 /ModelGen <connection string> <provider name> <model name> [<version>] [includeFKs] [pluralize]");
-            Console.WriteLine("                 /RetrofitModel <connection string> <provider name> <model name> <percent threshold>?");
             Console.WriteLine("                 /ViewGen cs|vb <edmx file>");
             Console.WriteLine("                 /CodeGen cs|vb <edmx file>");
             Console.WriteLine("                 /Validate <edmx file>");
-            Console.WriteLine("RetrofitModel option takes table names in the form [schema_name].[table_name] from the file tables.txt, one per line, if it exists.");
         }
 
         #region the functions that actually do the interesting things
@@ -298,33 +291,6 @@ namespace EdmGen2
             ToEdmx(
                 csdl.ToString(), ssdl.ToString(), msl.ToString(), new FileInfo(
                     modelName + ".edmx"));
-        }
-
-        private static void RetrofitModel(string[] args)
-        {
-            if (args.Length < 4 || args.Length > 5)
-            {
-                ShowUsage();
-                return;
-            }
-
-            Generator cedm;
-            if (args.Length == 5)
-            {
-                cedm = new ConceptualEdmGen.Generator(args[1], args[3], args[2], Convert.ToDouble(args[4]));
-            }
-            else
-            {
-                cedm = new ConceptualEdmGen.Generator(args[1], args[3], args[2]);
-            }
-            if (File.Exists("tables.txt"))
-            {
-                if (cedm.SetTables("tables.txt"))
-                {
-                    return;
-                }
-            }
-            cedm.Execute();
         }
         
         private static void CodeGen(string[] args)
@@ -676,10 +642,6 @@ namespace EdmGen2
             else if ("/Validate".Equals(arg, StringComparison.OrdinalIgnoreCase))
             {
                 return Mode.Validate;
-            }
-            else if ("/RetrofitModel".Equals(arg, StringComparison.OrdinalIgnoreCase))
-            {
-                return Mode.RetrofitModel;
             }
             else
             {
