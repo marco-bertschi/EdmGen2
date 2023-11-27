@@ -23,8 +23,8 @@ jobs:
         run: cd $GITHUB_WORKSPACE
 
       - name: Restore Packages
-        run: nuget restore EdmGen2.sln
+        run: nuget restore src/EdmGen2.sln
 
       - name: Build Solution
         run: |
-          msbuild.exe EdmGen2.sln /p:platform="Any CPU" /p:configuration="Release"
+          msbuild.exe src/EdmGen2.sln /p:platform="Any CPU" /p:configuration="Release"
