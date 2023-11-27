@@ -28,3 +28,7 @@ jobs:
       - name: Build Solution
         run: |
           msbuild.exe src/EdmGen2.sln /p:platform="Any CPU" /p:configuration="Release"
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Publish Build Artifacts
+          path: src/EdmGen2/bin/Release
